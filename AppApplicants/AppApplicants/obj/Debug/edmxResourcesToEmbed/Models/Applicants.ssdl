@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BD_APPLICANTSModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="BD_APPLICANTSModelStoreContainer">
+    <EntitySet Name="Administrator" EntityType="BD_APPLICANTSModel.Store.Administrator" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Applicant" EntityType="BD_APPLICANTSModel.Store.Applicant" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Files_Adjunt" EntityType="BD_APPLICANTSModel.Store.Files_Adjunt" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Job" EntityType="BD_APPLICANTSModel.Store.Job" store:Type="Tables" Schema="dbo" />
+  </EntityContainer>
+  <EntityType Name="Administrator">
+    <Key>
+      <PropertyRef Name="Consecutive" />
+    </Key>
+    <Property Name="Consecutive" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="First_Name" Type="varchar" Nullable="false" MaxLength="30" />
+    <Property Name="Second_Name" Type="varchar" Nullable="false" MaxLength="30" />
+    <Property Name="First_Last_Name" Type="varchar" Nullable="false" MaxLength="30" />
+    <Property Name="Second_Last_Name" Type="varchar" Nullable="false" MaxLength="30" />
+    <Property Name="Email" Type="varchar" MaxLength="50" />
+    <Property Name="Phone" Type="varchar" MaxLength="14" />
+  </EntityType>
+  <EntityType Name="Applicant">
+    <Key>
+      <PropertyRef Name="Consecutive" />
+    </Key>
+    <Property Name="Consecutive" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="ID_Job" Type="int" />
+    <Property Name="Firts_Name" Type="varchar" Nullable="false" MaxLength="30" />
+    <Property Name="Second_Name" Type="varchar" Nullable="false" MaxLength="30" />
+    <Property Name="First_Last_Name" Type="varchar" Nullable="false" MaxLength="30" />
+    <Property Name="Second_Last_Name" Type="varchar" Nullable="false" MaxLength="30" />
+    <Property Name="Email" Type="varchar" MaxLength="50" />
+    <Property Name="International_Phone_Number" Type="varchar" MaxLength="14" />
+    <Property Name="Biography" Type="varchar" Nullable="false" MaxLength="200" />
+    <Property Name="Birtday" Type="date" Nullable="false" />
+    <Property Name="Street_Adress" Type="varchar" Nullable="false" MaxLength="100" />
+    <Property Name="City" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Country" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Postal_Code" Type="varchar" MaxLength="5" />
+    <Property Name="PathPhotoLocal" Type="varchar" MaxLength="300" />
+    <Property Name="PathPhotoURL" Type="varchar" MaxLength="300" />
+  </EntityType>
+  <EntityType Name="Files_Adjunt">
+    <Key>
+      <PropertyRef Name="Consecutive" />
+    </Key>
+    <Property Name="Consecutive" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Id_Applicant" Type="int" Nullable="false" />
+    <Property Name="File_Name" Type="varchar" Nullable="false" MaxLength="100" />
+    <Property Name="Tipe_File" Type="varchar" Nullable="false" MaxLength="3" />
+    <Property Name="Size" Type="numeric" Nullable="false" Precision="12" Scale="2" />
+    <Property Name="Path_File_Local" Type="varchar" Nullable="false" MaxLength="300" />
+    <Property Name="Path_File_URL" Type="varchar" Nullable="false" MaxLength="300" />
+    <Property Name="Description_File" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Job">
+    <Key>
+      <PropertyRef Name="Consecutive" />
+    </Key>
+    <Property Name="Consecutive" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="varbinary" MaxLength="50" />
+  </EntityType>
+  <Function Name="SP_CONSULT_APPLICANT_ALL" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="SP_CONSULT_APPLICANT_BY_ID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Consecutive" Type="int" Mode="In" />
+  </Function>
+  <Function Name="SP_CONSULT_FILE_ADJUNT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID_Applicant" Type="int" Mode="In" />
+  </Function>
+  <Function Name="SP_DELETE_APPLICANT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Consecutive" Type="int" Mode="In" />
+  </Function>
+  <Function Name="SP_DELETE_FILE_ADJUNT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Consecutive" Type="int" Mode="In" />
+  </Function>
+  <Function Name="SP_EDIT_APPLICANT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Consecutive" Type="int" Mode="In" />
+    <Parameter Name="ID_Job" Type="int" Mode="In" />
+    <Parameter Name="Firts_Name" Type="varchar" Mode="In" />
+    <Parameter Name="Second_Name" Type="varchar" Mode="In" />
+    <Parameter Name="First_Last_Name" Type="varchar" Mode="In" />
+    <Parameter Name="Second_Last_Name" Type="varchar" Mode="In" />
+    <Parameter Name="Email" Type="varchar" Mode="In" />
+    <Parameter Name="International_Phone_Number" Type="varchar" Mode="In" />
+    <Parameter Name="Biography" Type="varchar" Mode="In" />
+    <Parameter Name="Birtday" Type="date" Mode="In" />
+    <Parameter Name="Street_Adress" Type="varchar" Mode="In" />
+    <Parameter Name="City" Type="varchar" Mode="In" />
+    <Parameter Name="Country" Type="varchar" Mode="In" />
+    <Parameter Name="Postal_Code" Type="varchar" Mode="In" />
+    <Parameter Name="PathPhotoLocal" Type="varchar" Mode="In" />
+    <Parameter Name="PathPhotoURL" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SP_INSERT_APPLICANT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID_Job" Type="int" Mode="In" />
+    <Parameter Name="Firts_Name" Type="varchar" Mode="In" />
+    <Parameter Name="Second_Name" Type="varchar" Mode="In" />
+    <Parameter Name="First_Last_Name" Type="varchar" Mode="In" />
+    <Parameter Name="Second_Last_Name" Type="varchar" Mode="In" />
+    <Parameter Name="Email" Type="varchar" Mode="In" />
+    <Parameter Name="International_Phone_Number" Type="varchar" Mode="In" />
+    <Parameter Name="Biography" Type="varchar" Mode="In" />
+    <Parameter Name="Birtday" Type="date" Mode="In" />
+    <Parameter Name="Street_Adress" Type="varchar" Mode="In" />
+    <Parameter Name="City" Type="varchar" Mode="In" />
+    <Parameter Name="Country" Type="varchar" Mode="In" />
+    <Parameter Name="Postal_Code" Type="varchar" Mode="In" />
+    <Parameter Name="PathPhotoLocal" Type="varchar" Mode="In" />
+    <Parameter Name="PathPhotoURL" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SP_INSERT_FILE_ADJUNT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id_Applicant" Type="int" Mode="In" />
+    <Parameter Name="File_Name" Type="varchar" Mode="In" />
+    <Parameter Name="Tipe_File" Type="varchar" Mode="In" />
+    <Parameter Name="Size" Type="numeric" Mode="In" />
+    <Parameter Name="Path_File_Local" Type="varchar" Mode="In" />
+    <Parameter Name="Path_File_URL" Type="varchar" Mode="In" />
+    <Parameter Name="Description_File" Type="varchar" Mode="In" />
+  </Function>
+</Schema>

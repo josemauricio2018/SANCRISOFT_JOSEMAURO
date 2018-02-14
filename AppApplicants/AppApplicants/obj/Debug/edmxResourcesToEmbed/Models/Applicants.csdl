@@ -1,0 +1,166 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BD_APPLICANTSModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="BD_APPLICANTSEntities2" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="Administrator" EntityType="BD_APPLICANTSModel.Administrator" />
+    <EntitySet Name="Applicant" EntityType="BD_APPLICANTSModel.Applicant" />
+    <EntitySet Name="Files_Adjunt" EntityType="BD_APPLICANTSModel.Files_Adjunt" />
+    <EntitySet Name="Job" EntityType="BD_APPLICANTSModel.Job" />
+    <FunctionImport Name="SP_CONSULT_APPLICANT_ALL" ReturnType="Collection(BD_APPLICANTSModel.SP_CONSULT_APPLICANT_ALL_Result)" />
+    <FunctionImport Name="SP_CONSULT_APPLICANT_BY_ID" ReturnType="Collection(BD_APPLICANTSModel.SP_CONSULT_APPLICANT_BY_ID_Result)">
+      <Parameter Name="Consecutive" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="SP_CONSULT_FILE_ADJUNT" ReturnType="Collection(BD_APPLICANTSModel.SP_CONSULT_FILE_ADJUNT_Result)">
+      <Parameter Name="ID_Applicant" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="SP_DELETE_APPLICANT">
+      <Parameter Name="Consecutive" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="SP_DELETE_FILE_ADJUNT">
+      <Parameter Name="Consecutive" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="SP_EDIT_APPLICANT">
+      <Parameter Name="Consecutive" Mode="In" Type="Int32" />
+      <Parameter Name="ID_Job" Mode="In" Type="Int32" />
+      <Parameter Name="Firts_Name" Mode="In" Type="String" />
+      <Parameter Name="Second_Name" Mode="In" Type="String" />
+      <Parameter Name="First_Last_Name" Mode="In" Type="String" />
+      <Parameter Name="Second_Last_Name" Mode="In" Type="String" />
+      <Parameter Name="Email" Mode="In" Type="String" />
+      <Parameter Name="International_Phone_Number" Mode="In" Type="String" />
+      <Parameter Name="Biography" Mode="In" Type="String" />
+      <Parameter Name="Birtday" Mode="In" Type="DateTime" />
+      <Parameter Name="Street_Adress" Mode="In" Type="String" />
+      <Parameter Name="City" Mode="In" Type="String" />
+      <Parameter Name="Country" Mode="In" Type="String" />
+      <Parameter Name="Postal_Code" Mode="In" Type="String" />
+      <Parameter Name="PathPhotoLocal" Mode="In" Type="String" />
+      <Parameter Name="PathPhotoURL" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SP_INSERT_APPLICANT">
+      <Parameter Name="ID_Job" Mode="In" Type="Int32" />
+      <Parameter Name="Firts_Name" Mode="In" Type="String" />
+      <Parameter Name="Second_Name" Mode="In" Type="String" />
+      <Parameter Name="First_Last_Name" Mode="In" Type="String" />
+      <Parameter Name="Second_Last_Name" Mode="In" Type="String" />
+      <Parameter Name="Email" Mode="In" Type="String" />
+      <Parameter Name="International_Phone_Number" Mode="In" Type="String" />
+      <Parameter Name="Biography" Mode="In" Type="String" />
+      <Parameter Name="Birtday" Mode="In" Type="DateTime" />
+      <Parameter Name="Street_Adress" Mode="In" Type="String" />
+      <Parameter Name="City" Mode="In" Type="String" />
+      <Parameter Name="Country" Mode="In" Type="String" />
+      <Parameter Name="Postal_Code" Mode="In" Type="String" />
+      <Parameter Name="PathPhotoLocal" Mode="In" Type="String" />
+      <Parameter Name="PathPhotoURL" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SP_INSERT_FILE_ADJUNT">
+      <Parameter Name="Id_Applicant" Mode="In" Type="Int32" />
+      <Parameter Name="File_Name" Mode="In" Type="String" />
+      <Parameter Name="Tipe_File" Mode="In" Type="String" />
+      <Parameter Name="Size" Mode="In" Type="Decimal" />
+      <Parameter Name="Path_File_Local" Mode="In" Type="String" />
+      <Parameter Name="Path_File_URL" Mode="In" Type="String" />
+      <Parameter Name="Description_File" Mode="In" Type="String" />
+    </FunctionImport>
+  </EntityContainer>
+  <EntityType Name="Administrator">
+    <Key>
+      <PropertyRef Name="Consecutive" />
+    </Key>
+    <Property Name="Consecutive" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="First_Name" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="Second_Name" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="First_Last_Name" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="Second_Last_Name" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="Email" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="Phone" Type="String" MaxLength="14" Unicode="false" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Applicant">
+    <Key>
+      <PropertyRef Name="Consecutive" />
+    </Key>
+    <Property Name="Consecutive" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_Job" Type="Int32" />
+    <Property Name="Firts_Name" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="Second_Name" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="First_Last_Name" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="Second_Last_Name" Type="String" Nullable="false" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="Email" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="International_Phone_Number" Type="String" MaxLength="14" Unicode="false" FixedLength="false" />
+    <Property Name="Biography" Type="String" Nullable="false" MaxLength="200" Unicode="false" FixedLength="false" />
+    <Property Name="Birtday" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Street_Adress" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="City" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="Country" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="Postal_Code" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+    <Property Name="PathPhotoLocal" Type="String" MaxLength="300" Unicode="false" FixedLength="false" />
+    <Property Name="PathPhotoURL" Type="String" MaxLength="300" Unicode="false" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Files_Adjunt">
+    <Key>
+      <PropertyRef Name="Consecutive" />
+    </Key>
+    <Property Name="Consecutive" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Id_Applicant" Type="Int32" Nullable="false" />
+    <Property Name="File_Name" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="Tipe_File" Type="String" Nullable="false" MaxLength="3" Unicode="false" FixedLength="false" />
+    <Property Name="Size" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+    <Property Name="Path_File_Local" Type="String" Nullable="false" MaxLength="300" Unicode="false" FixedLength="false" />
+    <Property Name="Path_File_URL" Type="String" Nullable="false" MaxLength="300" Unicode="false" FixedLength="false" />
+    <Property Name="Description_File" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Job">
+    <Key>
+      <PropertyRef Name="Consecutive" />
+    </Key>
+    <Property Name="Consecutive" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="Binary" MaxLength="50" FixedLength="false" />
+  </EntityType>
+  <ComplexType Name="SP_CONSULT_APPLICANT_ALL_Result">
+    <Property Type="Int32" Name="Consecutive" Nullable="false" />
+    <Property Type="Int32" Name="ID_Job" Nullable="true" />
+    <Property Type="String" Name="Firts_Name" Nullable="false" MaxLength="30" />
+    <Property Type="String" Name="Second_Name" Nullable="false" MaxLength="30" />
+    <Property Type="String" Name="First_Last_Name" Nullable="false" MaxLength="30" />
+    <Property Type="String" Name="Second_Last_Name" Nullable="false" MaxLength="30" />
+    <Property Type="String" Name="Email" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="International_Phone_Number" Nullable="true" MaxLength="14" />
+    <Property Type="String" Name="Biography" Nullable="false" MaxLength="200" />
+    <Property Type="DateTime" Name="Birtday" Nullable="false" />
+    <Property Type="String" Name="Street_Adress" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="City" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Country" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Postal_Code" Nullable="true" MaxLength="5" />
+    <Property Type="String" Name="PathPhotoLocal" Nullable="true" MaxLength="300" />
+    <Property Type="String" Name="PathPhotoURL" Nullable="true" MaxLength="300" />
+    <Property Type="Binary" Name="Name_Job" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="SP_CONSULT_APPLICANT_BY_ID_Result">
+    <Property Type="Int32" Name="Consecutive" Nullable="false" />
+    <Property Type="Int32" Name="ID_Job" Nullable="true" />
+    <Property Type="String" Name="Firts_Name" Nullable="false" MaxLength="30" />
+    <Property Type="String" Name="Second_Name" Nullable="false" MaxLength="30" />
+    <Property Type="String" Name="First_Last_Name" Nullable="false" MaxLength="30" />
+    <Property Type="String" Name="Second_Last_Name" Nullable="false" MaxLength="30" />
+    <Property Type="String" Name="Email" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="International_Phone_Number" Nullable="true" MaxLength="14" />
+    <Property Type="String" Name="Biography" Nullable="false" MaxLength="200" />
+    <Property Type="DateTime" Name="Birtday" Nullable="false" />
+    <Property Type="String" Name="Street_Adress" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="City" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Country" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Postal_Code" Nullable="true" MaxLength="5" />
+    <Property Type="String" Name="PathPhotoLocal" Nullable="true" MaxLength="300" />
+    <Property Type="String" Name="PathPhotoURL" Nullable="true" MaxLength="300" />
+    <Property Type="Binary" Name="Name_Job" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="SP_CONSULT_FILE_ADJUNT_Result">
+    <Property Type="Int32" Name="Consecutive" Nullable="false" />
+    <Property Type="String" Name="File_Name" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="Tipe_File" Nullable="false" MaxLength="3" />
+    <Property Type="Decimal" Name="Size" Nullable="false" Precision="12" Scale="2" />
+    <Property Type="String" Name="Path_File_Local" Nullable="false" MaxLength="300" />
+    <Property Type="String" Name="Path_File_URL" Nullable="false" MaxLength="300" />
+    <Property Type="String" Name="Description_File" Nullable="true" MaxLength="100" />
+  </ComplexType>
+</Schema>
