@@ -9,7 +9,7 @@ namespace AppApplicants.Models
 {
     public class ManageApplicants
     {
-        private BD_APPLICANTSEntities2 dbApplicantContext = new BD_APPLICANTSEntities2();
+        private BD_APPLICANTSEntities3 dbApplicantContext = new BD_APPLICANTSEntities3();
 
         public ManageApplicants() { 
         
