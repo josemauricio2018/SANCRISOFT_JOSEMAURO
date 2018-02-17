@@ -12,6 +12,12 @@
     <meta name="viewport" content="width=device-width" />
     <title>Create</title>
 
+    <link rel="stylesheet" href="../../Content/themes/base/jquery.ui.all.css">
+    <script src="../../Scripts/jquery-1.7.1.js"></script>
+    <script src="../../Scripts/jquery.ui.core.js"></script>
+    <script src="../../Scripts/jquery.ui.widget.js"></script>
+    <script src="../../Scripts/jquery.ui.accordion.js"></script>	
+
     <script type="text/jscript">
     $(document).on("click", "#btnid", function (event) {
         event.preventDefault();
@@ -23,11 +29,21 @@
 
         //https://stackoverflow.com/questions/15680629/mvc-4-razor-file-upload
     });
+
+    $(function () {
+        $("#accordion").accordion({
+            collapsible: true
+        });
+    });
+
     </script>
 
     
 </head>
 <body>
+
+<div id="accordion">
+  <h3><a href="#">Information Personal</a></h3>
     <div>
         
     @using (Html.BeginForm()) {
@@ -179,6 +195,7 @@
     </fieldset>
     }
 
+    </div>
     </div>
 
     @section Scripts {
