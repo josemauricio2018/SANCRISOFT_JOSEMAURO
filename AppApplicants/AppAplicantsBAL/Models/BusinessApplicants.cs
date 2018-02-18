@@ -8,12 +8,31 @@ using AppApplicants.Models;
 
 namespace AppAplicantsBAL.Models
 {
-    public class BusinessApplicants
+    public class BusinessApplicants : IApplicants
     {
         public BusinessApplicants() { 
         
         }
 
+        /// <summary>
+        /// En este procedimiento se habilita la adición de nuevos aplicantes.
+        /// </summary>
+        /// <param name="Id_Job"></param>
+        /// <param name="First_Name"></param>
+        /// <param name="Second_Name"></param>
+        /// <param name="First_Last_Name"></param>
+        /// <param name="Second_Last_Name"></param>
+        /// <param name="Email"></param>
+        /// <param name="International_Phone_Number"></param>
+        /// <param name="Biography"></param>
+        /// <param name="Birthday"></param>
+        /// <param name="Street_Adress"></param>
+        /// <param name="City"></param>
+        /// <param name="Country"></param>
+        /// <param name="Postal_Code"></param>
+        /// <param name="Path_Photo_Local"></param>
+        /// <param name="Path_Photo_URL"></param>
+        /// <returns></returns>
         public Boolean Create_Applicants(int Id_Job, string First_Name, string Second_Name, string First_Last_Name, string Second_Last_Name, string Email, string International_Phone_Number, string Biography, DateTime Birthday, string Street_Adress, string City, string Country, string Postal_Code, string Path_Photo_Local, string Path_Photo_URL)
         {
             Boolean Result = false;
@@ -88,6 +107,26 @@ namespace AppAplicantsBAL.Models
             return Result;
         }
 
+        /// <summary>
+        /// En este procedimiento se habilita la actualización de aplicantes existentes.
+        /// </summary>
+        /// <param name="Consec_Applicant"></param>
+        /// <param name="Id_Job"></param>
+        /// <param name="First_Name"></param>
+        /// <param name="Second_Name"></param>
+        /// <param name="First_Last_Name"></param>
+        /// <param name="Second_Last_Name"></param>
+        /// <param name="Email"></param>
+        /// <param name="International_Phone_Number"></param>
+        /// <param name="Biography"></param>
+        /// <param name="Birthday"></param>
+        /// <param name="Street_Adress"></param>
+        /// <param name="City"></param>
+        /// <param name="Country"></param>
+        /// <param name="Postal_Code"></param>
+        /// <param name="Path_Photo_Local"></param>
+        /// <param name="Path_Photo_URL"></param>
+        /// <returns></returns>
         public Boolean Edit_Applicants(int Consec_Applicant, int Id_Job, string First_Name, string Second_Name, string First_Last_Name, string Second_Last_Name, string Email, string International_Phone_Number, string Biography, DateTime Birthday, string Street_Adress, string City, string Country, string Postal_Code, string Path_Photo_Local, string Path_Photo_URL)
         {
             Boolean Result = false;
@@ -162,7 +201,11 @@ namespace AppAplicantsBAL.Models
             return Result;
         }
 
-
+        /// <summary>
+        /// En este procedimiento se habilita la eliminación de aplicantes existentes.
+        /// </summary>
+        /// <param name="Consec_Applicant"></param>
+        /// <returns></returns>
         public Boolean Delete_Applicants(int Consec_Applicant)
         {
             Boolean Result = false;
@@ -181,6 +224,30 @@ namespace AppAplicantsBAL.Models
             return Result;
         }
 
+        /// <summary>
+        /// En este procedimiento se habilita la consulta de los aplicantes.
+        /// </summary>
+        /// <param name="Consec_Applicant"></param>
+        /// <returns></returns>
+        public IEnumerable<Report_Applicants> Consult_Applicants(string Consec_Applicant)
+        {
+            IEnumerable<Report_Applicants> lstApplicants = null;
+
+            try
+            {
+                if (!string.IsNullOrEmpty(Consec_Applicant))
+                {
+                    AppApplicants.Models.ManageApplicants manageApplicants = new AppApplicants.Models.ManageApplicants();
+
+                    return (manageApplicants.Consult_Applicants(Consec_Applicant));
+                }
+            }
+            catch (Exception Ex)
+            {
+            }
+
+            return lstApplicants.AsEnumerable();
+        }
 
     }
 }
