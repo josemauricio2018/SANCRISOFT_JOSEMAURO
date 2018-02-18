@@ -155,23 +155,23 @@ namespace AppApplicants.Models
         /// </summary>
         /// <param name="Consec_Applicant"></param>
         /// <returns></returns>
-        public IEnumerable<Applicant> Consult_Applicants(string Consec_Applicant)
+        public IEnumerable<Report_Applicants> Consult_Applicants(string Consec_Applicant)
         {
-            List<Applicant> lstApplicant = new List<Applicant>();
+            List<Report_Applicants> lstApplicant = new List<Report_Applicants>();
 
             try
             {
                 if (!string.IsNullOrEmpty(Consec_Applicant))
                 {
-
                     var consultApplicant = dbApplicantContext.SP_CONSULT_APPLICANT_BY_ID(Convert.ToInt32(Consec_Applicant));
 
                     foreach (var item in consultApplicant)
                     {
-                        lstApplicant.Add(new Applicant()
+                        lstApplicant.Add(new Report_Applicants()
                         {
                             Consecutive = item.Consecutive,
                             ID_Job = item.ID_Job,
+                            Job_Name = item.Name_Job,
                             Firts_Name = item.Firts_Name,
                             Second_Name = item.Second_Name,
                             First_Last_Name = item.First_Last_Name,
@@ -195,10 +195,11 @@ namespace AppApplicants.Models
 
                     foreach (var item in consultApplicant)
                     {
-                        lstApplicant.Add(new Applicant()
+                        lstApplicant.Add(new Report_Applicants()
                         {
                             Consecutive = item.Consecutive,
                             ID_Job = item.ID_Job,
+                            Job_Name = item.Name_Job,
                             Firts_Name = item.Firts_Name,
                             Second_Name = item.Second_Name,
                             First_Last_Name = item.First_Last_Name,
