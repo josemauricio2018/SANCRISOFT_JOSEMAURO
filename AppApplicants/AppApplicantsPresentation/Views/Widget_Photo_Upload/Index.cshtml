@@ -1,0 +1,113 @@
+﻿@using AppAplicantsBAL.Models;
+@model AppAplicantsBAL.Models.ApplicantView
+
+<html>
+<head>
+    <title>Index</title>
+
+    <link href="/Content/Site.css" rel="stylesheet" />
+    <link href="/Content/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Libs -->
+    <script src="/Scripts/jquery-1.7.1.js"></script>
+    <script src="/Content/bootstrap/js/bootstrap.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+
+    <script type="text/jscript">
+
+        $(function () {
+            $("#save_File_Upload").click(function () {
+                $("form").attr("action", "/Applicants/Save_Photo");
+            });
+
+            $("#salir").click(function () {
+                $("form").attr("action", "/Applicants/Exit");
+            });
+        });
+
+        // just for the demos, avoids form submit
+        jQuery.validator.setDefaults({
+            debug: true,
+            success: "valid"
+        });
+        $("#registerFormId").validate({
+            rules: {
+                txtUpload: {
+                    required: true,
+                    extension: "gif|jpeg|png",
+                    accept: "application/pdf,image/jpeg,image/png,image/gif",
+                    filesize: 1024000   //max size 1024 kb 1 mb                
+                }
+            }, messages: {
+                txtUpload: {
+                    filesize: "File size must be less than 1 MB.",
+                    accept: "Please upload .jpg or .png or .gif file of notice.",
+                    required: "Please upload file."
+                }
+            },
+            submitHandler: function (form) {
+                form.submit();
+            }
+        });
+
+    </script>
+</head>
+<body>
+    @{
+        ApplicantView applicant = new ApplicantView();
+        applicant = TempData["ModelApplicant"] as ApplicantView;
+
+        AppApplicants.Models.Files_Adjunt reportFiles_Adjunt = new AppApplicants.Models.Files_Adjunt();    
+        IEnumerable<AppApplicants.Models.Files_Adjunt> lstReportFiles_Adjunt = TempData["ReportFiles_Adjunt"] as IEnumerable<AppApplicants.Models.Files_Adjunt>;
+    }
+
+    @{
+        var grid = new WebGrid(lstReportFiles_Adjunt, canPage: true, rowsPerPage: 5, selectionFieldName: "selectedRow", ajaxUpdateContainerId: "gridContent");
+        grid.Pager(WebGridPagerModes.NextPrevious);
+        
+        
+        <div class="div_left" >
+            foreach (AppApplicants.Models.Files_Adjunt item in lstReportFiles_Adjunt)
+            { 
+                <img src="~/Files/item" width="300" height="300" class="img-photo" alt="Cinque Terre" />
+            }
+        </div>        
+    }
+
+    <div>
+
+        @using (Html.BeginForm("Applicants", "Upload_Photo", FormMethod.Post, new { @id = "registerFormId", @class = "form-horizontal", role = "form" }))  
+        {          
+            <input type="text" name="txtFile_Adjunt" id="file_Adjunt" value="File Adjunt: " />
+            <input type="file" id="txtUpload" name="Upload" />
+            <input type="button" value="Upload" id="btnUpload" />
+            <label for="txtUpload">Required, images files only:</label>
+        }
+
+
+        @using (Html.BeginForm())
+        {
+            if (applicant != null)
+            {
+                @Html.HiddenFor(model => model.file_Adjunt.File_Name, new { @Value = applicant.file_Adjunt.File_Name })
+                @Html.HiddenFor(model => model.file_Adjunt.Description_File, new { @Value = applicant.file_Adjunt.Description_File })           
+                @*@Html.HiddenFor(model =>model.Codigo_Error, new {@Value = business.Codigo_Error})                
+                @Html.HiddenFor(model =>model.Descripcion_Error, new {@Value = business.Descripcion_Error})*@
+                
+                <textarea class="form-control" 
+                id="Description" 
+                name="Description" 
+                rows="2"
+                cols="50"></textarea>
+            
+                <input type="submit" id="save_File_Upload" value="Save" />
+                <input type="submit" id="exit" value="Exit" /> 
+            }
+        }
+
+    </div>
+</body>
+</html>
