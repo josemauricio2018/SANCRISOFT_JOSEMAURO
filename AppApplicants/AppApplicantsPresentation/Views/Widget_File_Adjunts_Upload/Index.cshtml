@@ -12,20 +12,12 @@
     <script src="/Scripts/jquery-1.7.1.js"></script>
     <script src="/Content/bootstrap/js/bootstrap.min.js"></script>
 
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+
     <script type="text/jscript">
         
-        $('#btnUplad').click(function () {
-            var has_selected_file = $('#txtUpload').filter(function () {
-                return $.trim(this.value) != ''
-            }).length > 0;
-            if (has_selected_file) {
-                $('#frm').submit();
-            }
-            else {
-                alert('No file selected');
-            }
-        });
-
         $(function () {
             $("#save_File_Upload").click(function () {
                 $("form").attr("action", "/Applicants/Save_File_Adjunt");
@@ -36,6 +28,30 @@
             });
         });
 
+        // just for the demos, avoids form submit
+        jQuery.validator.setDefaults({
+            debug: true,
+            success: "valid"
+        });
+        $("#registerFormId").validate({
+            rules: {
+                txtUpload: {
+                    required: true,
+                    extension: "pdf|doc|docx|png|gif|jpeg|png",
+                    accept: "application/pdf,image/jpeg,image/png,image/gif",
+                    filesize: 5120000   //max size 5120 kb 5 mb                
+                }
+            }, messages: {
+                txtUpload: {
+                        filesize:" file size must be less than 5 MB.",
+                        accept:"Please upload .jpg or .png or .gif or .pdf or .doc or .docx file of notice.",
+                        required:"Please upload file."
+                }
+            },
+            submitHandler: function(form) {
+                form.submit();
+            } 
+        });
 
     </script>
 </head>
@@ -46,33 +62,33 @@
 
         AppApplicants.Models.Files_Adjunt reportFiles_Adjunt = new AppApplicants.Models.Files_Adjunt();    
         IEnumerable<AppApplicants.Models.Files_Adjunt> lstReportFiles_Adjunt = TempData["ReportFiles_Adjunt"] as IEnumerable<AppApplicants.Models.Files_Adjunt>;
+
+        var grid = new WebGrid(lstReportFiles_Adjunt, canPage: true, rowsPerPage: 5, selectionFieldName: "selectedRow", ajaxUpdateContainerId: "gridContent");
+        grid.Pager(WebGridPagerModes.NextPrevious);
     }
 
-    @{
-        var grid = new WebGrid(lstReportFiles_Adjunt, canPage: true, rowsPerPage: 5, selectionFieldName: "selectedRow", ajaxUpdateContainerId: "gridContent");
-        grid.Pager(WebGridPagerModes.NextPrevious);}
-
     <div>
-        @*@using (Html.BeginForm())
-        {
-            if (business != null)
-            {*@
-                @*@Html.HiddenFor(model =>model.Tipo_Usuario, new {@Value = business.Tipo_Usuario})
-                @Html.HiddenFor(model =>model.Codigo_EmpleadoRC, new {@Value = business.Codigo_EmpleadoRC})           
-                @Html.HiddenFor(model =>model.Codigo_Error, new {@Value = business.Codigo_Error})                
-                @Html.HiddenFor(model =>model.Descripcion_Error, new {@Value = business.Descripcion_Error})
-                
-                <input type="submit" id="ingresar_salas" value="Ingresar Salas Consultas" />
-                <input type="submit" id="salir" value="Salir" />*@ 
-            @*}
-        }*@
-
-        @using (Html.BeginForm("Applicants", "Upload_File_Adjunts", FormMethod.Post, new { enctype = "multipart/form-data", @id="frm" }))
+        
+        @*@using (Html.BeginForm("Applicants", "Upload_File_Adjunts", FormMethod.Post, new { enctype = "multipart/form-data", @id="frm" }))
         {
             <input type="text" name="txtFile_Adjunt" id="file_Adjunt" value="File Adjunt: " />
             <input type="file" id="txtUpload" />
             <input type="button" value="Upload" id="btnUpload" />
+        }*@
+
+        @*<form method="post" action='@Url.Action("Applicants", "Upload_File_Adjunts")'>*@
+
+        @using (Html.BeginForm("Applicants", "Upload_File_Adjunts", FormMethod.Post, new { @id = "registerFormId", @class = "form-horizontal", role = "form" }))  
+        {          
+            <div class="k-content">
+                <input type="text" name="txtFile_Adjunt" id="file_Adjunt" value="File Adjunt: " />
+                <input type="file" id="txtUpload" name="Upload" />
+                <input type="button" value="Upload" id="btnUpload" />
+                <label for="txtUpload">Required, pdf or word or images files only:</label>
+            </div>
         }
+        @*</form>*@
+        
 
         @if (lstReportFiles_Adjunt != null)
         {
@@ -97,7 +113,6 @@
             @if (grid.HasSelection)
             {
                 reportFiles_Adjunt = (AppApplicants.Models.Files_Adjunt)grid.Rows[grid.SelectedIndex].Value;
-                        //<b>StrConsecutivo</b> @reporteAgendaCitas.StrConsecutivo<br />
                         <b>File Name</b> @reportFiles_Adjunt.File_Name<br />
                         <b>Size</b> @reportFiles_Adjunt.Size<br />
                         <b>Description</b> @reportFiles_Adjunt.Description_File<br />
@@ -107,8 +122,13 @@
             </div>    
         }
 
-        @using (Html.BeginForm("Applicants", "Upload_File_Adjunts", FormMethod.Post, new { enctype = "multipart/form-data", @id = "frm" }))
-        {
+
+        @using (Html.BeginForm())
+        {  
+            
+        @*@using (Html.BeginForm("Applicants", "Upload_File_Adjunts", FormMethod.Post, new { enctype = "multipart/form-data", @id = "frm" }))
+        {*@
+            
             if (applicant != null)
             {
                 @Html.HiddenFor(model =>model.file_Adjunt.File_Name, new {@Value = applicant.file_Adjunt.File_Name})
