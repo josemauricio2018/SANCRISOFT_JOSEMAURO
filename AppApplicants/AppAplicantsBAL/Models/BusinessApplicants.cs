@@ -33,9 +33,9 @@ namespace AppAplicantsBAL.Models
         /// <param name="Path_Photo_Local"></param>
         /// <param name="Path_Photo_URL"></param>
         /// <returns></returns>
-        public Boolean Create_Applicants(int Id_Job, string First_Name, string Second_Name, string First_Last_Name, string Second_Last_Name, string Email, string International_Phone_Number, string Biography, DateTime Birthday, string Street_Adress, string City, string Country, string Postal_Code, string Path_Photo_Local, string Path_Photo_URL)
+        public int Create_Applicants(int Id_Job, string First_Name, string Second_Name, string First_Last_Name, string Second_Last_Name, string Email, string International_Phone_Number, string Biography, DateTime Birthday, string Street_Adress, string City, string Country, string Postal_Code, string Path_Photo_Local, string Path_Photo_URL)
         {
-            Boolean Result = false;
+            int Id_Applicant = 0;
             BusinessModel business = new BusinessModel();
 
             try
@@ -44,7 +44,7 @@ namespace AppAplicantsBAL.Models
                 Regex ValEmail = new Regex(@"\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*");
                 Regex ValPhone = new Regex(@"^(?!0+$)(\\+\\d{1,3}[- ]?)?(?!0+$)\\d{10,15}$");
 
-                if (!Val.IsMatch(First_Name))
+                if (string.IsNullOrEmpty(First_Name))
                 {
 
                     business.CodigoError = 1;
@@ -52,7 +52,7 @@ namespace AppAplicantsBAL.Models
                 }
                 else
                 {
-                    if (!Val.IsMatch(Second_Name))
+                    if (string.IsNullOrEmpty(Second_Name))
                     {
 
                         business.CodigoError = 2;
@@ -60,7 +60,7 @@ namespace AppAplicantsBAL.Models
                     }
                     else
                     {
-                        if (!Val.IsMatch(First_Last_Name))
+                        if (string.IsNullOrEmpty(First_Last_Name))
                         {
 
                             business.CodigoError = 3;
@@ -68,7 +68,7 @@ namespace AppAplicantsBAL.Models
                         }
                         else
                         {
-                            if (!Val.IsMatch(Second_Last_Name))
+                            if (string.IsNullOrEmpty(Second_Last_Name))
                             {
                                 business.CodigoError = 5;
                                 business.DescriptionError = "The Second Last Name is invalid.";
@@ -80,20 +80,20 @@ namespace AppAplicantsBAL.Models
                                     business.CodigoError = 6;
                                     business.DescriptionError = "The Email is invalid.";
                                 }
-                                else
+                                /*else
                                 {
-                                    if (!ValEmail.IsMatch(International_Phone_Number))
+                                    if (!ValPhone.IsMatch(International_Phone_Number))
                                     {
                                         business.CodigoError = 7;
                                         business.DescriptionError = "The International Phone Number is invalid.";
                                     }
-                                }
+                                }*/
                             }
                         }
                     }
                 }
 
-                if (business.CodigoError == 0 && !string.IsNullOrEmpty(business.DescriptionError))
+                if (business.CodigoError == 0 && string.IsNullOrEmpty(business.DescriptionError))
                 {
                     AppApplicants.Models.ManageApplicants manageApplicants = new AppApplicants.Models.ManageApplicants();
 
@@ -104,7 +104,7 @@ namespace AppAplicantsBAL.Models
             {
             }
 
-            return Result;
+            return Id_Applicant;
         }
 
         /// <summary>

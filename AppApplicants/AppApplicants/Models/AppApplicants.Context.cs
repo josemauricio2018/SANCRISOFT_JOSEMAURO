@@ -16,10 +16,10 @@ namespace AppApplicants.Models
     using System.Data.Objects.DataClasses;
     using System.Linq;
     
-    public partial class BD_APPLICANTSEntities3 : DbContext
+    public partial class BD_APPLICANTSEntities1 : DbContext
     {
-        public BD_APPLICANTSEntities3()
-            : base("name=BD_APPLICANTSEntities3")
+        public BD_APPLICANTSEntities1()
+            : base("name=BD_APPLICANTSEntities1")
         {
         }
     
@@ -148,7 +148,7 @@ namespace AppApplicants.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_EDIT_APPLICANT", consecutiveParameter, iD_JobParameter, firts_NameParameter, second_NameParameter, first_Last_NameParameter, second_Last_NameParameter, emailParameter, international_Phone_NumberParameter, biographyParameter, birtdayParameter, street_AdressParameter, cityParameter, countryParameter, postal_CodeParameter, pathPhotoLocalParameter, pathPhotoURLParameter);
         }
     
-        public virtual int SP_INSERT_APPLICANT(Nullable<int> iD_Job, string firts_Name, string second_Name, string first_Last_Name, string second_Last_Name, string email, string international_Phone_Number, string biography, Nullable<System.DateTime> birtday, string street_Adress, string city, string country, string postal_Code, string pathPhotoLocal, string pathPhotoURL)
+        public virtual int SP_INSERT_APPLICANT(Nullable<int> iD_Job, string firts_Name, string second_Name, string first_Last_Name, string second_Last_Name, string email, string international_Phone_Number, string biography, Nullable<System.DateTime> birtday, string street_Adress, string city, string country, string postal_Code, string pathPhotoLocal, string pathPhotoURL, ObjectParameter id_Applicant)
         {
             var iD_JobParameter = iD_Job.HasValue ?
                 new ObjectParameter("ID_Job", iD_Job) :
@@ -210,7 +210,7 @@ namespace AppApplicants.Models
                 new ObjectParameter("PathPhotoURL", pathPhotoURL) :
                 new ObjectParameter("PathPhotoURL", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_INSERT_APPLICANT", iD_JobParameter, firts_NameParameter, second_NameParameter, first_Last_NameParameter, second_Last_NameParameter, emailParameter, international_Phone_NumberParameter, biographyParameter, birtdayParameter, street_AdressParameter, cityParameter, countryParameter, postal_CodeParameter, pathPhotoLocalParameter, pathPhotoURLParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_INSERT_APPLICANT", iD_JobParameter, firts_NameParameter, second_NameParameter, first_Last_NameParameter, second_Last_NameParameter, emailParameter, international_Phone_NumberParameter, biographyParameter, birtdayParameter, street_AdressParameter, cityParameter, countryParameter, postal_CodeParameter, pathPhotoLocalParameter, pathPhotoURLParameter, id_Applicant);
         }
     
         public virtual int SP_INSERT_FILE_ADJUNT(Nullable<int> id_Applicant, string file_Name, string tipe_File, Nullable<decimal> size, string path_File_Local, string path_File_URL, string description_File)

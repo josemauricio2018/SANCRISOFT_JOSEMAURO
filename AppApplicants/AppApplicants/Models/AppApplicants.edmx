@@ -51,7 +51,7 @@
           <Property Name="Consecutive" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Id_Applicant" Type="int" Nullable="false" />
           <Property Name="File_Name" Type="varchar" Nullable="false" MaxLength="100" />
-          <Property Name="Tipe_File" Type="varchar" Nullable="false" MaxLength="3" />
+          <Property Name="Tipe_File" Type="varchar" Nullable="false" MaxLength="4" />
           <Property Name="Size" Type="numeric" Nullable="false" Precision="12" Scale="2" />
           <Property Name="Path_File_Local" Type="varchar" Nullable="false" MaxLength="300" />
           <Property Name="Path_File_URL" Type="varchar" Nullable="false" MaxLength="300" />
@@ -112,6 +112,7 @@
           <Parameter Name="Postal_Code" Type="varchar" Mode="In" />
           <Parameter Name="PathPhotoLocal" Type="varchar" Mode="In" />
           <Parameter Name="PathPhotoURL" Type="varchar" Mode="In" />
+          <Parameter Name="Id_Applicant" Type="int" Mode="InOut" />
         </Function>
         <Function Name="SP_INSERT_FILE_ADJUNT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id_Applicant" Type="int" Mode="In" />
@@ -127,7 +128,7 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="BD_APPLICANTSModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="BD_APPLICANTSEntities3" p1:LazyLoadingEnabled="true">
+        <EntityContainer Name="BD_APPLICANTSEntities1" p1:LazyLoadingEnabled="true">
           <EntitySet Name="Administrator" EntityType="BD_APPLICANTSModel.Administrator" />
           <EntitySet Name="Applicant" EntityType="BD_APPLICANTSModel.Applicant" />
           <EntitySet Name="Files_Adjunt" EntityType="BD_APPLICANTSModel.Files_Adjunt" />
@@ -180,6 +181,7 @@
             <Parameter Name="Postal_Code" Mode="In" Type="String" />
             <Parameter Name="PathPhotoLocal" Mode="In" Type="String" />
             <Parameter Name="PathPhotoURL" Mode="In" Type="String" />
+            <Parameter Name="Id_Applicant" Mode="InOut" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_INSERT_FILE_ADJUNT">
             <Parameter Name="Id_Applicant" Mode="In" Type="Int32" />
@@ -231,7 +233,7 @@
           <Property Name="Consecutive" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
           <Property Name="Id_Applicant" Type="Int32" Nullable="false" />
           <Property Name="File_Name" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
-          <Property Name="Tipe_File" Type="String" Nullable="false" MaxLength="3" Unicode="false" FixedLength="false" />
+          <Property Name="Tipe_File" Type="String" Nullable="false" MaxLength="4" Unicode="false" FixedLength="false" />
           <Property Name="Size" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
           <Property Name="Path_File_Local" Type="String" Nullable="false" MaxLength="300" Unicode="false" FixedLength="false" />
           <Property Name="Path_File_URL" Type="String" Nullable="false" MaxLength="300" Unicode="false" FixedLength="false" />
@@ -280,12 +282,12 @@
           <Property Type="String" Name="Postal_Code" Nullable="true" MaxLength="5" />
           <Property Type="String" Name="PathPhotoLocal" Nullable="true" MaxLength="300" />
           <Property Type="String" Name="PathPhotoURL" Nullable="true" MaxLength="300" />
-          <Property Type="String" Name="Name_Job" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Job_Name" Nullable="true" MaxLength="50" />
         </ComplexType>
         <ComplexType Name="SP_CONSULT_FILE_ADJUNT_Result">
           <Property Type="Int32" Name="Consecutive" Nullable="false" />
           <Property Type="String" Name="File_Name" Nullable="false" MaxLength="100" />
-          <Property Type="String" Name="Tipe_File" Nullable="false" MaxLength="3" />
+          <Property Type="String" Name="Tipe_File" Nullable="false" MaxLength="4" />
           <Property Type="Decimal" Name="Size" Nullable="false" Precision="12" Scale="2" />
           <Property Type="String" Name="Path_File_Local" Nullable="false" MaxLength="300" />
           <Property Type="String" Name="Path_File_URL" Nullable="false" MaxLength="300" />
@@ -300,7 +302,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="BD_APPLICANTSModelStoreContainer" CdmEntityContainer="BD_APPLICANTSEntities3">
+        <EntityContainerMapping StorageEntityContainer="BD_APPLICANTSModelStoreContainer" CdmEntityContainer="BD_APPLICANTSEntities1">
           <EntitySetMapping Name="Administrator">
             <EntityTypeMapping TypeName="BD_APPLICANTSModel.Administrator">
               <MappingFragment StoreEntitySet="Administrator">
@@ -400,7 +402,7 @@
                 <ScalarProperty Name="Postal_Code" ColumnName="Postal_Code" />
                 <ScalarProperty Name="PathPhotoLocal" ColumnName="PathPhotoLocal" />
                 <ScalarProperty Name="PathPhotoURL" ColumnName="PathPhotoURL" />
-                <ScalarProperty Name="Name_Job" ColumnName="Name_Job" />
+                <ScalarProperty Name="Job_Name" ColumnName="Job_Name" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

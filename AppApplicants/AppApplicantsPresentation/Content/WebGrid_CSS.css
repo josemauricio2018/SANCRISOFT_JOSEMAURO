@@ -1,0 +1,37 @@
+﻿.webGrid a
+{
+color: #000;
+}
+
+.webGrid-header
+{
+padding: 6px 5px;
+text-align: center;
+background-color: floralwhite; /*#e8eef4;*/
+border-bottom: 2px solid #3966A2;
+height: 40px;
+border-top: 2px solid #D6E8FF;
+border-left: 2px solid #D6E8FF;
+border-right: 2px solid #D6E8FF;
+}
+
+.webGrid-footer
+{
+padding: 6px 5px;
+text-align: center;
+background-color: floralwhite;
+border-top: 2px solid #3966A2;
+height: 30px;
+border-bottom: 2px solid #D6E8FF;
+border-left: 2px solid #D6E8FF;
+border-right: 2px solid #D6E8FF;
+}
+
+.px60{width: 60px; text-align: center;}
+.px80{width: 80px; text-align: center;}
+.px90{width: 90px; text-align: center;}
+.px120{width: 120px; text-align: center;}
+.px150{width: 150px; text-align: center;}
+.px180{width: 180px; text-align: center;}
+.px200{width: 200px; text-align: center;}
+.px300{width: 300px; text-align: center;}

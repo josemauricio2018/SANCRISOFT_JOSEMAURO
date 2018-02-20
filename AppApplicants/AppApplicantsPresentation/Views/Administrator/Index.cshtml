@@ -1,0 +1,286 @@
+﻿@model AppAplicantsBAL.Models.ApplicantView
+
+@{
+    //Layout = null;
+    ViewBag.Title = "Administrator";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Create</title>
+
+    <link rel="stylesheet" href="../../Content/themes/base/jquery.ui.all.css">
+    <script src="../../Scripts/jquery-1.7.1.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+
+    <script src="../../Scripts/jquery.ui.core.js"></script>
+    <script src="../../Scripts/jquery.ui.widget.js"></script>
+    <script src="../../Scripts/jquery.ui.accordion.js"></script>	
+
+    <script type="text/jscript">
+
+        $(function () {
+            $("#accordion").accordion({
+                collapsible: true
+            });
+        });
+
+        $(document).ready(function () {
+            var Description_Biography = "Academic Trainig:<br /><br />Work Experience:<br /><br />";
+            $('#Biography').val(Description_Biography);            
+
+            $('#Biography').keypress(function(){
+                if (this.value.length > 100) // allowing you to enter only 100 chars.
+                    return false;        
+            });​
+        });
+
+
+
+    </script>
+    
+</head>
+<body>
+
+<h2>Module Administrator</h2>
+
+<div id="accordion">
+  <h3><a href="#">Information Personal</a></h3>
+
+    <div>
+        
+    <div class="editor-field ui-widget">
+        @Html.Partial("~/Views/Widget_Gallery_Photo_Applicants/Index.cshtml")
+    </div>
+
+    @using (Html.BeginForm())
+    {  
+    @Html.ValidationSummary(true)
+
+     <fieldset>
+        <legend>Clientes</legend>
+
+        <table>
+             <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.ID_Job, new { style = "display:inline; font-size: 12pt; font-weight: bold;" })
+                    </div>
+                </td>
+                @*<td>
+                    <div class="editor-field">
+                        @Html.DropDownListFor(model => model.ID_Job, Model.sjobs, "--Select a Job--")
+                        @Html.ValidationMessageFor(model => model.ID_Job)
+                    </div>
+                </td>*@
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Firts_Name, new { style = "display:inline; font-size: 12pt; font-weight: bold;", @class="Labelfor_First_Name" })
+                    </div>
+                </td>
+                 <td>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.Firts_Name, new {@class="Editorfor_First_Name" })
+                        @Html.ValidationMessageFor(model => model.Firts_Name)               
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Second_Name, new { style = "display:inline; font-size: 12pt; font-weight: bold;", @class="Labelfor_Second_Name" })
+                    </div>
+                </td>
+                 <td>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.Second_Name, new {@class="Editorfor_Second_Name" })
+                        @Html.ValidationMessageFor(model => model.Second_Name)               
+                    </div>
+                </td>
+
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.First_Last_Name, new { style = "display:inline; font-size: 12pt; font-weight: bold;", @class="Labelfor_First_Last_Name" })
+                    </div>
+                </td>
+                 <td>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.First_Last_Name, new { @class="Editorfor_First_Last_Name" })
+                        @Html.ValidationMessageFor(model => model.First_Last_Name)               
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Second_Last_Name, new { style = "display:inline; font-size: 12pt; font-weight: bold;", @class="Labelfor_Second_Last_Name" })
+                    </div>
+                </td>
+                 <td>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.Second_Last_Name, new { @class="Editorfor_Second_Name" })
+                        @Html.ValidationMessageFor(model => model.Second_Name)               
+                    </div>
+                </td>
+
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Email, new { style = "display:inline; font-size: 12pt; font-weight: bold;" })
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.Email, new { cssClass = "Editorfor_SegundoNombre" })
+                        @Html.ValidationMessageFor(model => model.Email)
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.International_Phone_Number, new { style = "display:inline; font-size: 12pt; font-weight: bold;", @class="Labelfor_International_Phone_Number" })
+                    </div>
+                </td>
+                     <div class="editor-field">
+                        @Html.TextBoxFor(model => model.International_Phone_Number, new { @class="Editorfor_International_Phone_Number" })
+                        @Html.ValidationMessageFor(model => model.International_Phone_Number)               
+                    </div>
+                </td>
+
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Birtday, new { style = "display:inline; font-size: 12pt; font-weight: bold;", @class="Labelfor_Birthday" })
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Birtday, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Birtday, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Birtday, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Street_Adress, new { style = "display:inline; font-size: 12pt; font-weight: bold;", @class="Labelfor_Street_Adress" })
+                    </div>
+                </td>
+                 <td>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.Street_Adress, new {@class="Editorfor_Street_Adress" })
+                        @Html.ValidationMessageFor(model => model.Street_Adress)               
+                    </div>
+                </td>
+
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.City, new { style = "display:inline; font-size: 12pt; font-weight: bold;", @class="City" })
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.City, new { cssClass = "Editorfor_City" })
+                        @Html.ValidationMessageFor(model => model.City)
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Country, new { style = "display:inline; font-size: 12pt; font-weight: bold;", @class="Labelfor_Country" })
+                    </div>
+                </td>
+                 <td>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.Country, new {@class="Editorfor_Country" })
+                        @Html.ValidationMessageFor(model => model.Country)               
+                    </div>
+                </td>
+
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Postal_Code, new { style = "display:inline; font-size: 12pt; font-weight: bold;", @class="Postal_Code" })
+                    </div>
+                </td>
+                <td>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.Postal_Code, new { cssClass = "Editorfor_Postal_Code" })
+                        @Html.ValidationMessageFor(model => model.Postal_Code)
+                    </div>
+                </td>
+            </tr>
+
+        </table>
+
+        <table>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Biography, new { style = "display:inline; font-size: 12pt; font-weight: bold;", @class="Labelfor_Biography" })
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.TextAreaFor(model => model.Biography, new { @class = "form-control", @rows=6, @maxlength=100 }) 
+                    </div>
+                </td>
+            </tr>
+        </table>
+
+        <table>
+            <tr>
+                <td>
+                    <p>
+                        <input type="submit" id="salir" value="Salir" />
+                    </p>
+                </td>
+            </tr>
+        </table>
+
+    </fieldset>
+    }
+    </div>
+
+    <h3><a href="#">Files Adjunts</a></h3>
+    <div class="editor-field ui-widget">
+        @Html.Partial("~/Views/Widget_Download_File_Adjunts/Index.cshtml")
+    </div>
+ </div>
+
+
+ @section Scripts {
+    @Scripts.Render("~/bundles/jqueryval");
+    @Scripts.Render("~/bundles/jqueryui")  
+    @Styles.Render("~/Content/cssjqryUi")  
+  
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('input[type=datetime]').datepicker({
+                dateFormat: "mm/dd/yy",
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "-60:+0"
+            });
+        });
+    </script>  
+ }
+
+</body>
+</html>

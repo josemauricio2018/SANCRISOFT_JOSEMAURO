@@ -1,17 +1,86 @@
-﻿@{
-    Layout = null;
-}
-
-<!DOCTYPE html>
+﻿@using AppAplicantsBAL.Models;
+@model AppAplicantsBAL.Models.ApplicantView
 
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
     <title>Index</title>
+
+    <link href="/Content/Site.css" rel="stylesheet" />
+    
+    <!-- Libs -->
+    <script src="/Scripts/jquery-1.7.1.js"></script>
+    
+    <script type="text/jscript">
+
+    </script>
 </head>
 <body>
+    @{
+        /*ApplicantView applicant = new ApplicantView();
+        applicant = TempData["ModelReportApplicants"] as ApplicantView;*/
+
+        AppApplicants.Models.Report_Applicants reportApplicants = new AppApplicants.Models.Report_Applicants();
+        IEnumerable<AppApplicants.Models.Report_Applicants> lstReportApplicants = TempData["ReportApplicants"] as IEnumerable<AppApplicants.Models.Report_Applicants>;
+
+        var grid = new WebGrid(lstReportApplicants, canPage: true, rowsPerPage: 5, selectionFieldName: "selectedRow", ajaxUpdateContainerId: "gridContent");
+        grid.Pager(WebGridPagerModes.NextPrevious);
+    }
+
     <div>
-        
+        @if (lstReportApplicants != null)
+        {
+            <div id="gridContent">
+            @{
+            var gridColumns = new List<WebGridColumn>();
+            gridColumns.Add(grid.Column("Consecutive", "Consecutive"));
+            gridColumns.Add(grid.Column("Job Id", "ID_Job"));
+            gridColumns.Add(grid.Column("Job Name ", "Job_Name"));
+            gridColumns.Add(grid.Column("First Name", "Firts_Name"));
+            gridColumns.Add(grid.Column("Second Name", "Second_Name"));
+            gridColumns.Add(grid.Column("First Last Name", "Firts_Last_Name"));
+            gridColumns.Add(grid.Column("Second Last Name", "Second_Last_Name"));
+            gridColumns.Add(grid.Column("Email", "Email"));
+            gridColumns.Add(grid.Column("International Phone Number", "International_Phone_Number"));
+            gridColumns.Add(grid.Column("Biography", "Biography"));
+            gridColumns.Add(grid.Column("Birthdate", "Birtday"));
+            gridColumns.Add(grid.Column("Street Adress", "Street_Adress"));
+            gridColumns.Add(grid.Column("City", "City"));
+            gridColumns.Add(grid.Column("Country", "Country"));
+            gridColumns.Add(grid.Column("Postal Code", "Postal_Code"));
+
+            gridColumns.Add(grid.Column("Edit", "Edit", canSort: false, style: "Edit_Applicant", format: (item) => Html.ActionLink("Edit", "Edit_Applicant", "Applicants", new { Consecutive = @item.Consecutive, Id_Job = @item.ID_Job, Job_Name = @item.Job_Name, Firts_Name = @item.Firts_Name, Second_Name = @item.Second_Name, Firts_Last_Name = @item.Firts_Last_Name, Second_Last_Name = @item.Second_Last_Name, Email = @item.Email, International_Phone_Number = @item.International_Phone_Number, Biography = @item.Biography, Birthdate = @item.Birtday, Street_Adress = @item.Street_Adress, City = @item.City, Country = @item.Country, Postal_Code = @item.Postal_Code, Modulo = 2 }, null)));
+            }
+
+            @grid.GetHtml(tableStyle: "webGrid",
+            headerStyle: "header",
+            alternatingRowStyle: "alt",
+            selectedRowStyle: "select",
+            columns: grid.Columns(gridColumns.ToArray())
+            )
+
+            @if (grid.HasSelection)
+            {
+                reportApplicants = (AppApplicants.Models.Report_Applicants)grid.Rows[grid.SelectedIndex].Value;
+                        <b>Job Id</b> @reportApplicants.ID_Job<br />
+                        <b>Job Name</b> @reportApplicants.Job_Name<br />
+                        <b>First Name</b> @reportApplicants.Firts_Name<br />
+                        <b>Second Name</b> @reportApplicants.Second_Name<br />
+                        <b>First Last Name</b> @reportApplicants.First_Last_Name<br />
+                        <b>Second Last Name</b> @reportApplicants.Second_Last_Name<br />
+                        <b>First Name</b> @reportApplicants.Firts_Name<br />
+                        <b>Second Name</b> @reportApplicants.Second_Name<br />
+                        <b>Email</b> @reportApplicants.Email<br />
+                        <b>International Phone Number</b> @reportApplicants.International_Phone_Number<br />
+                        <b>Biography</b> @reportApplicants.Biography<br />
+                        <b>Birthdate</b> @reportApplicants.Birtday<br />
+                        <b>Street Address</b> @reportApplicants.Street_Adress<br />
+                        <b>City</b> @reportApplicants.City<br />
+                        <b>Country</b> @reportApplicants.Country<br />
+                        <b>Postal Code</b> @reportApplicants.Postal_Code<br />
+            }        
+            </div>    
+        }
+
     </div>
 </body>
 </html>

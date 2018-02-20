@@ -171,43 +171,48 @@
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Administrator.cs">
-      <DependentUpon>Applicants.tt</DependentUpon>
+      <DependentUpon>AppApplicants.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AppApplicants.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AppApplicants.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AppApplicants.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AppApplicants.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AppApplicants.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AppApplicants.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Applicant.cs">
-      <DependentUpon>Applicants.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Applicants.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Applicants.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Applicants.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Applicants.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Applicants.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Applicants.edmx</DependentUpon>
+      <DependentUpon>AppApplicants.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\BusinessModel.cs" />
     <Compile Include="Models\Files_Adjunt.cs">
-      <DependentUpon>Applicants.tt</DependentUpon>
+      <DependentUpon>AppApplicants.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Job.cs">
-      <DependentUpon>Applicants.tt</DependentUpon>
+      <DependentUpon>AppApplicants.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ManageApplicants.cs" />
     <Compile Include="Models\ManageFile_Adjunts.cs" />
+    <Compile Include="Models\ManageJobs.cs" />
+    <Compile Include="Models\Report_Applicants.cs" />
     <Compile Include="Models\SP_CONSULT_APPLICANT_ALL_Result.cs">
-      <DependentUpon>Applicants.tt</DependentUpon>
+      <DependentUpon>AppApplicants.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SP_CONSULT_APPLICANT_BY_ID_Result.cs">
-      <DependentUpon>Applicants.tt</DependentUpon>
+      <DependentUpon>AppApplicants.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SP_CONSULT_FILE_ADJUNT_Result.cs">
-      <DependentUpon>Applicants.tt</DependentUpon>
+      <DependentUpon>AppApplicants.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SP_CONSULT_JOB_Result.cs">
+      <DependentUpon>AppApplicants.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -268,22 +273,22 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-    <EntityDeploy Include="Models\Applicants.edmx">
+    <EntityDeploy Include="Models\AppApplicants.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Applicants.Designer.cs</LastGenOutput>
+      <LastGenOutput>AppApplicants.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\Applicants.Context.tt">
+    <Content Include="Models\AppApplicants.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Applicants.edmx</DependentUpon>
-      <LastGenOutput>Applicants.Context.cs</LastGenOutput>
+      <DependentUpon>AppApplicants.edmx</DependentUpon>
+      <LastGenOutput>AppApplicants.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\Applicants.edmx.diagram">
-      <DependentUpon>Applicants.edmx</DependentUpon>
+    <Content Include="Models\AppApplicants.edmx.diagram">
+      <DependentUpon>AppApplicants.edmx</DependentUpon>
     </Content>
-    <Content Include="Models\Applicants.tt">
+    <Content Include="Models\AppApplicants.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Applicants.edmx</DependentUpon>
-      <LastGenOutput>Applicants.cs</LastGenOutput>
+      <DependentUpon>AppApplicants.edmx</DependentUpon>
+      <LastGenOutput>AppApplicants.cs</LastGenOutput>
     </Content>
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />

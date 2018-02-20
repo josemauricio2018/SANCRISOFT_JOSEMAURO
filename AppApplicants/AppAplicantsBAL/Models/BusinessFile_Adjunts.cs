@@ -17,27 +17,19 @@ namespace AppAplicantsBAL.Models
         /// </summary>
         /// <param name="Consec_Applicant"></param>
         /// <returns></returns>
-        public Boolean Create_File_Adjunt()
+        public Boolean Create_File_Adjunt(int Id_Applicant, string File_Name, string Type_File, decimal Size, string Path_File_Local, string Path_File_URL, string Description_File)
         {
             Boolean Result = false;
 
             try
             {
-                /*Files_Adjunt File_Adjunt = new Files_Adjunt();
-                File_Adjunt.Id_Applicant = Id_Applicant;
-                File_Adjunt.File_Name = File_Name;
-                File_Adjunt.Tipe_File = Type_File;
-                File_Adjunt.Size = Size;
-                File_Adjunt.Path_File_Local = Path_File_Local;
-                File_Adjunt.Path_File_URL = Path_File_URL;
-                File_Adjunt.Description_File = Description_File;
+                Result = true;
 
-                dbApplicantContext.SP_INSERT_FILE_ADJUNT(File_Adjunt.Id_Applicant, File_Adjunt.File_Name, File_Adjunt.Tipe_File, File_Adjunt.Size, File_Adjunt.Path_File_Local, File_Adjunt.Path_File_URL, File_Adjunt.Description_File);
-                */
+                AppApplicants.Models.ManageFile_Adjunts manageFile_Adjunts = new AppApplicants.Models.ManageFile_Adjunts();
+
+                return (manageFile_Adjunts.Create_File_Adjunt(Id_Applicant, File_Name, Type_File, Size, Path_File_Local, Path_File_URL, Description_File));
 
                 //Obtener el consecutivo del archivo adjunto insertado.
-
-                Result = true;
             }
             catch (Exception Ex)
             {

@@ -39,10 +39,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AppAplicantsBAL">
+    <Reference Include="AppAplicantsBAL, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\AppAplicantsBAL\bin\AppAplicantsBAL.dll</HintPath>
     </Reference>
-    <Reference Include="AppApplicants">
+    <Reference Include="AppApplicants, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\AppApplicants\bin\AppApplicants.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
@@ -168,8 +170,14 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdministratorController.cs" />
     <Compile Include="Controllers\ApplicantsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\Report_ApplicantsController.cs" />
+    <Compile Include="Controllers\Widget_Download_File_AdjuntsController.cs" />
+    <Compile Include="Controllers\Widget_File_Adjunts_UploadController.cs" />
+    <Compile Include="Controllers\Widget_Gallery_Photo_ApplicantsController.cs" />
+    <Compile Include="Controllers\Widget_Photo_UploadController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -233,14 +241,20 @@
     <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="Content\WebGrid_CSS.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
+    <Content Include="Models\Template_Email_Administrator.html" />
+    <Content Include="Models\Template_Email_Applicant.html" />
     <Content Include="Scripts\jquery-1.7.1.js" />
     <Content Include="Scripts\jquery-1.7.1.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery-ui-1.8.20.js" />
     <Content Include="Scripts\jquery-ui-1.8.20.min.js" />
+    <Content Include="Scripts\jquery.ui.accordion.js" />
+    <Content Include="Scripts\jquery.ui.core.js" />
+    <Content Include="Scripts\jquery.ui.widget.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
@@ -290,6 +304,12 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\Applicants\Create.cshtml" />
+    <Content Include="Views\Widget_File_Adjunts_Upload\Index.cshtml" />
+    <Content Include="Views\Widget_Photo_Upload\Index.cshtml" />
+    <Content Include="Views\Report_Applicants\Index.cshtml" />
+    <Content Include="Views\Administrator\Index.cshtml" />
+    <Content Include="Views\Widget_Download_File_Adjunts\Index.cshtml" />
+    <Content Include="Views\Widget_Gallery_Photo_Applicants\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

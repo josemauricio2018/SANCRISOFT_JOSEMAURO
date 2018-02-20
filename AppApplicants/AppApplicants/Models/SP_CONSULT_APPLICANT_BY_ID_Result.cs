@@ -29,6 +29,6 @@ namespace AppApplicants.Models
         public string Postal_Code { get; set; }
         public string PathPhotoLocal { get; set; }
         public string PathPhotoURL { get; set; }
-        public string Name_Job { get; set; }
+        public string Job_Name { get; set; }
     }
 }

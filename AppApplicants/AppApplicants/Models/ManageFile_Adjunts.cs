@@ -7,7 +7,7 @@ namespace AppApplicants.Models
 {
     public class ManageFile_Adjunts
     {
-        private BD_APPLICANTSEntities3 dbApplicantContext = new BD_APPLICANTSEntities3();
+        private BD_APPLICANTSEntities1 dbApplicantContext = new BD_APPLICANTSEntities1();
 
         public ManageFile_Adjunts() { 
         

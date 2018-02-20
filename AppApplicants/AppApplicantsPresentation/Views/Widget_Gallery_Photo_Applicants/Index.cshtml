@@ -1,0 +1,44 @@
+﻿@using AppAplicantsBAL.Models;
+@model AppAplicantsBAL.Models.ApplicantView
+
+<html>
+<head>
+    <title>Index</title>
+
+    <link href="/Content/Site.css" rel="stylesheet" />
+    <!-- Libs -->
+    <script src="/Scripts/jquery-1.7.1.js"></script>
+
+    <script type="text/jscript">
+
+        $(function () {
+            $("#save_File_Upload").click(function () {
+                $("form").attr("action", "/Applicants/Save_Photo");
+            });
+
+            $("#salir").click(function () {
+                $("form").attr("action", "/Applicants/Exit");
+            });
+        });
+
+    </script>
+</head>
+<body>
+    @{
+        ApplicantView applicant = new ApplicantView();
+        applicant = TempData["ModelApplicant"] as ApplicantView;
+
+        AppApplicants.Models.Files_Adjunt reportFiles_Adjunt = new AppApplicants.Models.Files_Adjunt();
+        IEnumerable<AppApplicants.Models.Files_Adjunt> lstReportFiles_Adjunt = TempData["ReportFiles_Adjunt"] as IEnumerable<AppApplicants.Models.Files_Adjunt>;
+
+            
+        <div class="div_left" >
+            @foreach (AppApplicants.Models.Files_Adjunt item in lstReportFiles_Adjunt)
+            { 
+                <img src="~/Files/@item" width="300" height="300" class="img-photo" alt="Cinque Terre" />
+            }
+        </div>        
+    }
+
+</body>
+</html>

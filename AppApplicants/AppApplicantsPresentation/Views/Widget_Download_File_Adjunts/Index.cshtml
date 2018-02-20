@@ -1,0 +1,84 @@
+﻿@using AppAplicantsBAL.Models;
+@model AppAplicantsBAL.Models.ApplicantView
+
+<html>
+<head>
+    <title>Index</title>
+
+    <link href="/Content/Site.css" rel="stylesheet" />
+    <script src="/Scripts/jquery-1.7.1.js"></script>    
+    <link href="../../Content/WebGrid_CSS.css" rel="stylesheet" />
+
+    <style type="text/css">
+        .webGrid { margin: 4px; border-collapse: collapse; width: 900px;  background-color:#FFFFFF;}
+        .header { background-color: #C1D4E6; font-weight: bold; color: #FFF; }
+        .webGrid th, .webGrid td { border: 1px solid #C0C0C0; padding: 5px; }
+        .alt { background-color: #E4E9F5; color: #000; }
+        .gridHead a:hover {text-decoration:underline;}
+        .description { width:auto}
+        .select{background-color: #389DF5}
+    </style>
+
+    <script type="text/javascript">
+
+        $(function () {
+            $("#save_File_Upload").click(function () {
+                $("form").attr("action", "/Applicants/Save_File_Adjunt");
+            });
+
+            $("#salir").click(function () {
+                $("form").attr("action", "/Applicants/Exit");
+            });
+        });
+
+    </script>
+</head>
+<body>
+    @{
+        ApplicantView applicant = new ApplicantView();
+        applicant = TempData["ModelApplicant"] as ApplicantView;
+
+        AppApplicants.Models.Files_Adjunt reportFiles_Adjunt = new AppApplicants.Models.Files_Adjunt();    
+        IEnumerable<AppApplicants.Models.Files_Adjunt> lstReportFiles_Adjunt = TempData["ReportFiles_Adjunt"] as IEnumerable<AppApplicants.Models.Files_Adjunt>;
+
+        var grid = new WebGrid(lstReportFiles_Adjunt, canPage: true, rowsPerPage: 5, selectionFieldName: "selectedRow", ajaxUpdateContainerId: "gridContent");
+        grid.Pager(WebGridPagerModes.NextPrevious);
+    }
+
+    <div>        
+
+        @if (lstReportFiles_Adjunt != null)
+        {
+            <div id="gridContent">
+            @{
+                var gridColumns = new List<WebGridColumn>();     
+                gridColumns.Add(grid.Column("File_Name", "File_Name"));       
+                gridColumns.Add(grid.Column("Size", "Size"));
+                gridColumns.Add(grid.Column("Description_File", "Description_File"));
+                gridColumns.Add(grid.Column("Path_File_Local", "Path_File_Local"));
+
+                gridColumns.Add(grid.Column("Download", "Download", canSort: false, style: "Download_File_Adjunt", format: (item) => Html.ActionLink("Download", "Download_File_Adjunt", "Administrator", new { Consecutive_File_Adjunt = @item.Consecutive, Modulo = 2 }, null)));
+            }
+
+            @grid.GetHtml(tableStyle: "webGrid",
+            headerStyle: "header",
+            alternatingRowStyle: "alt",
+            selectedRowStyle: "select",
+            columns: grid.Columns(gridColumns.ToArray())
+            )
+
+            @if (grid.HasSelection)
+            {
+                reportFiles_Adjunt = (AppApplicants.Models.Files_Adjunt)grid.Rows[grid.SelectedIndex].Value;
+                        <b>File Name</b> @reportFiles_Adjunt.File_Name<br />
+                        <b>Size</b> @reportFiles_Adjunt.Size<br />
+                        <b>Description</b> @reportFiles_Adjunt.Description_File<br />
+                        <b>Path File Local</b> @reportFiles_Adjunt.Path_File_Local<br />
+            }
+        
+            </div>    
+        }
+
+    </div>
+</body>
+</html>

@@ -6,17 +6,20 @@
     <title>Index</title>
 
     <link href="/Content/Site.css" rel="stylesheet" />
-    <link href="/Content/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="/Scripts/jquery-1.7.1.js"></script>    
+    <link href="../../Content/WebGrid_CSS.css" rel="stylesheet" />
 
-    <!-- Libs -->
-    <script src="/Scripts/jquery-1.7.1.js"></script>
-    <script src="/Content/bootstrap/js/bootstrap.min.js"></script>
+    <style type="text/css">
+        .webGrid { margin: 4px; border-collapse: collapse; width: 900px;  background-color:#FFFFFF;}
+        .header { background-color: #C1D4E6; font-weight: bold; color: #FFF; }
+        .webGrid th, .webGrid td { border: 1px solid #C0C0C0; padding: 5px; }
+        .alt { background-color: #E4E9F5; color: #000; }
+        .gridHead a:hover {text-decoration:underline;}
+        .description { width:auto}
+        .select{background-color: #389DF5}
+    </style>
 
-    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
-
-    <script type="text/jscript">
+    <script type="text/javascript">
         
         $(function () {
             $("#save_File_Upload").click(function () {
@@ -28,31 +31,128 @@
             });
         });
 
-        // just for the demos, avoids form submit
-        jQuery.validator.setDefaults({
-            debug: true,
-            success: "valid"
-        });
-        $("#registerFormId").validate({
-            rules: {
-                txtUpload: {
-                    required: true,
-                    extension: "pdf|doc|docx|png|gif|jpeg|png",
-                    accept: "application/pdf,image/jpeg,image/png,image/gif",
-                    filesize: 5120000   //max size 5120 kb 5 mb                
-                }
-            }, messages: {
-                txtUpload: {
-                        filesize:" file size must be less than 5 MB.",
-                        accept:"Please upload .jpg or .png or .gif or .pdf or .doc or .docx file of notice.",
-                        required:"Please upload file."
-                }
-            },
-            submitHandler: function(form) {
-                form.submit();
-            } 
+        $(document).ready(function () {
+
+            $("#Description_File_Adjunt").change(function () {
+
+                alert("Message File UP");
+
+                //alert($("#Description_File_Adjunt").val());
+
+                $("#Description_File").val($("#Description_File_Adjunt").val());
+
+                //alert($("#Description_File").val());
+
+            });
+
+            $('#btnUploadFU').click(function () {
+  
+                alert("hola");
+                // Checking whether FormData is available in browser  
+                if (window.FormData !== undefined) {  
+                    var fileUpload = $("#txtUploadFU").get(0);  
+                    var files = fileUpload.files;  
+                    
+                    var fileName = "";
+                    var size = 0;
+                    var typeFile = "";
+
+                    // Create FormData object  
+                    var fileData = new FormData();  
+  
+                    // Looping over all files and add it to FormData object  
+                    for (var i = 0; i < files.length; i++) {  
+                        //fileData.append(files[i].name, files[i]);  
+                        fileName = files[i].name;
+                        size = files[i].size;
+                        typeFile = files[i].type;
+                    }
+                    
+                    alert(typeFile);
+                    alert(size);
+
+                    if (size > 1 && size <= 5120000 && (typeFile == "application/pdf" || typeFile == "application/vnd.openxmlformats-officedocument.wordprocessingml.document" || typeFile == "image/png" || typeFile == "image/gif" || typeFile == "image/jpeg")) {
+                        var formData = new FormData();
+                        var totalFiles = document.getElementById("txtUploadFU").files.length;
+                        for (var i = 0; i < totalFiles; i++) {
+                            var file = document.getElementById("txtUploadFU").files[i];
+
+                            formData.append("txtUploadFU", file);
+                        }
+
+                        $.ajax({
+                            type: "POST",
+                            url: '/Applicants/Upload_File_Adjunts',
+                            data: formData,
+                            dataType: 'json',
+                            contentType: false,
+                            processData: false,
+                            success: function (response) {
+                                alert('succes!!');
+                            },
+                            error: function (error) {
+                                alert("errror");
+                            }
+                        });
+
+
+                        alert("FILEEEEEEEEEEEEEEEEEEEEEEEE");
+                        alert($('#Description_File').val());
+                        /*var dataRow = {
+                            'Description_File': $('#Description_File').val()
+                        }
+                        $.ajax({
+                            type: "POST",
+                            url: '/Applicants/Save_Description_File',
+                            data: dataRow,
+                            dataType: 'json',
+                            contentType: false,
+                            processData: false,
+                            success: function (response) {
+                                alert('succes!!');
+                            },
+                            error: function (error) {
+                                alert("errror");
+                            }
+                        });*/
+
+                        var dataRow = {
+                            'Description_File': $('#Description_File').val()
+                        }
+                        $.ajax({
+                            type: 'POST',
+                            url: "/Applicants/Save_Description_File",
+                            data: dataRow,
+                            success: function (response) {
+                                alert('succes!!');
+                            },
+                            error: function (error) {
+                                alert("errror");
+                            }
+                        });
+
+                    } else {
+                        if (!(size > 1 && size <= 5120000)) {
+                            alert('file size must be less than 5 MB.');
+                        }
+                        else {
+                            alert('Please upload .jpg or .png or .gif or .pdf or .doc or .docx file of notice.');
+                        }
+                    }
+
+                } else {  
+                    alert("FormData is not supported.");  
+                }  
+            });  
         });
 
+        function validateText_Area(e, obj) {
+            tecla = (document.all) ? e.keyCode : e.which;
+            if (tecla != 13) return;
+            rowsf = obj.rows;
+            txt = obj.value.split('\n');
+            return (txt.length < rowsf);
+        }
     </script>
 </head>
 <body>
@@ -67,28 +167,35 @@
         grid.Pager(WebGridPagerModes.NextPrevious);
     }
 
-    <div>
-        
-        @*@using (Html.BeginForm("Applicants", "Upload_File_Adjunts", FormMethod.Post, new { enctype = "multipart/form-data", @id="frm" }))
-        {
-            <input type="text" name="txtFile_Adjunt" id="file_Adjunt" value="File Adjunt: " />
-            <input type="file" id="txtUpload" />
-            <input type="button" value="Upload" id="btnUpload" />
-        }*@
+    <div>        
 
-        @*<form method="post" action='@Url.Action("Applicants", "Upload_File_Adjunts")'>*@
-
-        @using (Html.BeginForm("Applicants", "Upload_File_Adjunts", FormMethod.Post, new { @id = "registerFormId", @class = "form-horizontal", role = "form" }))  
+        @using (Html.BeginForm())
         {          
             <div class="k-content">
-                <input type="text" name="txtFile_Adjunt" id="file_Adjunt" value="File Adjunt: " />
-                <input type="file" id="txtUpload" name="Upload" />
-                <input type="button" value="Upload" id="btnUpload" />
-                <label for="txtUpload">Required, pdf or word or images files only:</label>
+                <label for="txtUploadFU">Required, pdf or word or images files only:</label>
+                <input type="text" name="txtFile_Adjunt" id="file_AdjuntFU" value="File Adjunt: " />
+                <input type="file" id="txtUploadFU" name="Upload" />
+                <input type="button" value="Upload" id="btnUploadFU" />
             </div>
+          
+            //if (applicant != null)
+            //{
+            //@Html.HiddenFor(model =>model.file_Adjunt.File_Name, new {@Value = applicant.file_Adjunt.File_Name})
+            @Html.HiddenFor(model => model.Description_File);//, new {@Value = applicant.Description_File})           
+            @*@Html.HiddenFor(model =>model.Codigo_Error, new {@Value = business.Codigo_Error})                
+            @Html.HiddenFor(model =>model.Descripcion_Error, new {@Value = business.Descripcion_Error})*@
+                
+            <textarea class="form-control" 
+            id="Description_File_Adjunt" 
+            name="Description_File_Adjunt" 
+            rows="2"
+            cols="50"
+            onkeypress = "return validateText_Area(event,this)" ></textarea>
+            
+                @*<input type="submit" id="save_File_Upload" value="Save" />
+                <input type="submit" id="exit" value="Exit" /> *@
+            //}
         }
-        @*</form>*@
-        
 
         @if (lstReportFiles_Adjunt != null)
         {
@@ -99,8 +206,6 @@
                 gridColumns.Add(grid.Column("Size", "Size"));
                 gridColumns.Add(grid.Column("Description", "Description_File"));
                 gridColumns.Add(grid.Column("Path File Local", "Path_File_Local"));
-
-                gridColumns.Add(grid.Column("Edit", "Edit", canSort: false, style: "Edit_File_Adjunt", format: (item) => Html.ActionLink("Edit", "Edit_File_Adjunt", "Applicants", new { Consecutive_File_Adjunt = @item.Consecutive, Modulo = 2 }, null)));
             }
 
             @grid.GetHtml(tableStyle: "webGrid",
@@ -121,33 +226,6 @@
         
             </div>    
         }
-
-
-        @using (Html.BeginForm())
-        {  
-            
-        @*@using (Html.BeginForm("Applicants", "Upload_File_Adjunts", FormMethod.Post, new { enctype = "multipart/form-data", @id = "frm" }))
-        {*@
-            
-            if (applicant != null)
-            {
-                @Html.HiddenFor(model =>model.file_Adjunt.File_Name, new {@Value = applicant.file_Adjunt.File_Name})
-                @Html.HiddenFor(model =>model.file_Adjunt.Description_File, new {@Value = applicant.file_Adjunt.Description_File})           
-                @*@Html.HiddenFor(model =>model.Codigo_Error, new {@Value = business.Codigo_Error})                
-                @Html.HiddenFor(model =>model.Descripcion_Error, new {@Value = business.Descripcion_Error})*@
-                
-                <textarea class="form-control" 
-                id="Description" 
-                name="Description" 
-                rows="2"
-                cols="50"></textarea>
-            
-                <input type="submit" id="save_File_Upload" value="Save" />
-                <input type="submit" id="exit" value="Exit" /> 
-
-            }
-        }
-
 
     </div>
 </body>

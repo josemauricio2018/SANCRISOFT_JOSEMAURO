@@ -9,7 +9,7 @@ namespace AppApplicants.Models
 {
     public class ManageApplicants
     {
-        private BD_APPLICANTSEntities3 dbApplicantContext = new BD_APPLICANTSEntities3();
+        private BD_APPLICANTSEntities1 dbApplicantContext = new BD_APPLICANTSEntities1();
 
         public ManageApplicants() { 
         
@@ -34,9 +34,9 @@ namespace AppApplicants.Models
         /// <param name="Path_Photo_Local"></param>
         /// <param name="Path_Photo_URL"></param>
         /// <returns></returns>
-        public Boolean Create_Applicants (int Id_Job, string First_Name, string Second_Name, string First_Last_Name, string Second_Last_Name, string Email, string International_Phone_Number, string Biography, DateTime Birthday, string Street_Adress, string City, string Country, string Postal_Code, string Path_Photo_Local, string Path_Photo_URL)
+        public int Create_Applicants (int Id_Job, string First_Name, string Second_Name, string First_Last_Name, string Second_Last_Name, string Email, string International_Phone_Number, string Biography, DateTime Birthday, string Street_Adress, string City, string Country, string Postal_Code, string Path_Photo_Local, string Path_Photo_URL)
         {
-            Boolean Result = false;
+            int Id_Applicant = 0;
 
             try
             {
@@ -57,14 +57,19 @@ namespace AppApplicants.Models
                 applicant.PathPhotoLocal = Path_Photo_Local;
                 applicant.PathPhotoURL = Path_Photo_URL;
 
-                dbApplicantContext.SP_INSERT_APPLICANT(applicant.ID_Job, applicant.Firts_Name, applicant.Second_Name, applicant.First_Last_Name, applicant.Second_Last_Name, applicant.Email, applicant.International_Phone_Number, applicant.Biography, applicant.Birtday, applicant.Street_Adress, applicant.City, applicant.Country, applicant.Postal_Code, applicant.PathPhotoLocal, applicant.PathPhotoURL);
+                ObjectParameter objParam = new ObjectParameter("Id_Applicant", typeof(int));
+                //var i = this.asterixContext.UpdateFullyPaidRecordStatus(value1, value2, value3, objParam);
+                //this.objectContext.SaveChanges();
+                //return Convert.ToInt32(objParam.Value);
 
-                Result = true;
+                dbApplicantContext.SP_INSERT_APPLICANT(applicant.ID_Job, applicant.Firts_Name, applicant.Second_Name, applicant.First_Last_Name, applicant.Second_Last_Name, applicant.Email, applicant.International_Phone_Number, applicant.Biography, applicant.Birtday, applicant.Street_Adress, applicant.City, applicant.Country, applicant.Postal_Code, applicant.PathPhotoLocal, applicant.PathPhotoURL, objParam);
+
+                Id_Applicant = Convert.ToInt32(objParam.Value);
             }
             catch (Exception Ex) {           
             }
             
-            return Result;
+            return Id_Applicant;
         }
 
 
@@ -171,7 +176,7 @@ namespace AppApplicants.Models
                         {
                             Consecutive = item.Consecutive,
                             ID_Job = item.ID_Job,
-                            Job_Name = item.Name_Job,
+                            Job_Name = item.Job_Name,
                             Firts_Name = item.Firts_Name,
                             Second_Name = item.Second_Name,
                             First_Last_Name = item.First_Last_Name,

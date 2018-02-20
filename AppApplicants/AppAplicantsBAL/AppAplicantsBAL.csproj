@@ -173,7 +173,11 @@
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\BusinessApplicants.cs" />
     <Compile Include="Models\BusinessFile_Adjunts.cs" />
+    <Compile Include="Models\BusinessJob.cs" />
     <Compile Include="Models\BusinessModel.cs" />
+    <Compile Include="Models\IApplicants.cs" />
+    <Compile Include="Models\IFile_Adjunts.cs" />
+    <Compile Include="Models\IJobs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
