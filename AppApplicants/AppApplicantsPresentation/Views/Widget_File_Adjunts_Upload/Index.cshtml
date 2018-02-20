@@ -35,19 +35,12 @@
 
             $("#Description_File_Adjunt").change(function () {
 
-                alert("Message File UP");
-
-                //alert($("#Description_File_Adjunt").val());
-
                 $("#Description_File").val($("#Description_File_Adjunt").val());
-
-                //alert($("#Description_File").val());
 
             });
 
             $('#btnUploadFU').click(function () {
   
-                alert("hola");
                 // Checking whether FormData is available in browser  
                 if (window.FormData !== undefined) {  
                     var fileUpload = $("#txtUploadFU").get(0);  
@@ -68,9 +61,6 @@
                         typeFile = files[i].type;
                     }
                     
-                    alert(typeFile);
-                    alert(size);
-
                     if (size > 1 && size <= 5120000 && (typeFile == "application/pdf" || typeFile == "application/vnd.openxmlformats-officedocument.wordprocessingml.document" || typeFile == "image/png" || typeFile == "image/gif" || typeFile == "image/jpeg")) {
                         var formData = new FormData();
                         var totalFiles = document.getElementById("txtUploadFU").files.length;
@@ -95,9 +85,6 @@
                             }
                         });
 
-
-                        alert("FILEEEEEEEEEEEEEEEEEEEEEEEE");
-                        alert($('#Description_File').val());
                         /*var dataRow = {
                             'Description_File': $('#Description_File').val()
                         }

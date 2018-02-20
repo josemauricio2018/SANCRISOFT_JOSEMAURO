@@ -86,5 +86,49 @@ namespace AppApplicantsPresentation.Controllers
 
             return applicant;
         }
+		
+		public FileResult Download_File_Adjunt(int Consecutive_File_Adjunt, int Modulo)
+        {
+			string filename = "";
+			string pathLocal = "";
+			string contentType = "";
+			string typeFile = "";
+			
+			IEnumerable<Files_Adjunt> lstFile_Adjunt = _repositoryFile_Adjunts.Consult_File_Adjunt(Consecutive_File_Adjunt.ToString());
+			
+			foreach(Files_Adjunt item in lstFile_Adjunt){
+				filename = item.File_Name;
+				pathLocal = item.Path_File_Local;
+				typeFile = item.Tipe_File;
+			}
+			
+			switch (typeFile) {
+				case ".docx":
+					contentType = "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
+					break;
+				
+				case ".png"
+					contentType = "image/png"; 
+					break;
+				
+				case ".gif":
+					contentType = "image/gif";
+					break;
+				
+				case ".jpeg":
+					contentType = "image/jpeg";
+					break;
+					
+				case ".pdf":
+					contentType = "application/pdf";
+					break;			
+			}
+				
+            //Parameters to file are
+            //1. The File Path on the File Server
+            //2. The content type MIME type
+            //3. The parameter for the file save by the browser
+            return File(pathLocal, contentType,filename);
+        }
     }
 }
