@@ -10,23 +10,56 @@
 namespace AppApplicants.Models
 {
     using System;
+	using System.ComponentModel;
+	using System.Data.Entity;
+	using System.Web;
+	using System.Web.Mvc;
     using System.Collections.Generic;
+	using System.ComponentModel.DataAnnotations;
+	using System.ComponentModel.DataAnnotations.Schema;
     
     public partial class Applicant
     {
         public int Consecutive { get; set; }
         public Nullable<int> ID_Job { get; set; }
+		[DisplayName("Primer Nombre")]
+        [Required(ErrorMessage = "El Primer Nombre es requerido.")]
+        [MaxLength(30, ErrorMessage = "La longitud del Primer Nombre no puede exceder de 30 caracteres.")]
         public string Firts_Name { get; set; }
+		[DisplayName("Segundo Nombre")]
+        [MaxLength(30, ErrorMessage = "La longitud del Segundo Nombre no puede exceder de 30 caracteres.")]
         public string Second_Name { get; set; }
+		[DisplayName("Primer Apellido")]
+        [Required(ErrorMessage = "El Primer Apellido es requerido.")]
+        [MaxLength(30, ErrorMessage = "La longitud del Primer Apellido no puede exceder de 30 caracteres.")]
         public string First_Last_Name { get; set; }
+		[DisplayName("Segundo Apellido")]
+        [Required(ErrorMessage = "El Segundo Apellido es requerido.")]
+        [MaxLength(30, ErrorMessage = "La longitud del Segundo Apellido no puede exceder de 30 caracteres.")]
         public string Second_Last_Name { get; set; }
+		[DataType(DataType.EmailAddress, ErrorMessage = "El Email no es valido.")]
         public string Email { get; set; }
+		[DisplayName("Número Telefónico Internacional")]
+        [Required(ErrorMessage = "El Número Telefónico Internacional es requerido.")]
         public string International_Phone_Number { get; set; }
+		[DisplayName("Biografia")]
         public string Biography { get; set; }
+		[DisplayName("Fecha de Nacimiento")]
+		[DataType(DataType.DateTime, ErrorMessage = "La Fecha de Nacimiento no es valida.")]
         public System.DateTime Birtday { get; set; }
+		[DisplayName("Dirección")]
+		[Required(ErrorMessage = "La Dirección es requerida.")]
+        [MaxLength(100, ErrorMessage = "La longitud de la Dirección no puede exceder de 100 caracteres.")]
         public string Street_Adress { get; set; }
+		[DisplayName("Ciudad")]
+		[Required(ErrorMessage = "La Ciudad es requerida.")]
+        [MaxLength(50, ErrorMessage = "La longitud de la Ciudad no puede exceder de 50 caracteres.")]
         public string City { get; set; }
+		[DisplayName("País")]
+		[Required(ErrorMessage = "El País es requeridao")]
+        [MaxLength(50, ErrorMessage = "La longitud del País no puede exceder de 50 caracteres.")]
         public string Country { get; set; }
+		[DisplayName("Código Postal")]
         public string Postal_Code { get; set; }
         public string PathPhotoLocal { get; set; }
         public string PathPhotoURL { get; set; }

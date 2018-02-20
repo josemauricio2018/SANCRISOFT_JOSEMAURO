@@ -152,7 +152,18 @@
             });​
         });
 
-
+		$("#International_Phone_Number").change(function () {
+			$("#International_Phone_Number").val($("#Country_Code").val()+"-"+$("#Area_Code").val()+"-"+$("#International_Phone_Number").val());
+		});
+		
+		$("#Country_Code").change(function () {
+			$("#International_Phone_Number").val($("#Country_Code").val()+"-"+$("#Area_Code").val()+"-"+$("#International_Phone_Number").val());
+		});
+		
+		$("#Area_Code").change(function () {
+			$("#International_Phone_Number").val($("#Country_Code").val()+"-"+$("#Area_Code").val()+"-"+$("#International_Phone_Number").val());
+		});
+		
         $(function () {
             $("#Create").click(function () {
 
@@ -265,7 +276,7 @@
 
 
         $(function () {
-            $("#create").click(function () {
+            $("#create").click(function () {				
                 $("form").attr("action", "/Applicants/Create");
             });
 
